@@ -42,11 +42,8 @@ builder.Services.AddSwaggerGen();
 // Thêm AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// Add Unit Of Work
-var connectionString = builder.Configuration.GetConnectionString("TodoListDemo");
-builder.Services.AddScoped<IUnitOfWork>(provider => new UnitOfWork(connectionString));
-
 // Add Service
+var connectionString = builder.Configuration.GetConnectionString("TodoListDemo");
 builder.Services.AddScoped<ITaskRepository>(provider => new TaskRepository(new MySqlConnection(connectionString)));
 builder.Services.AddScoped<ITaskService, TaskService>();
 
